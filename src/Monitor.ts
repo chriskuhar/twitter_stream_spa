@@ -1,4 +1,4 @@
-import { Entities, TweetData } from "./Tweet"
+import {Entities, TweetData} from "./Tweet"
 
 export default class Monitor {
     readonly #hashtagMap: Map<string, number>
@@ -22,7 +22,7 @@ export default class Monitor {
 
     addTweet = (tweet: TweetData) => {
         const entities: Entities | undefined = tweet.entities
-        if(entities !== undefined && entities.hashtags !== undefined) {
+        if (entities !== undefined && entities.hashtags !== undefined) {
             entities.hashtags.forEach(hashtag => {
                 this.addHashgag(hashtag.tag)
             })
@@ -31,11 +31,10 @@ export default class Monitor {
     }
 
     private addHashgag = (tag: string) => {
-        if(this.#hashtagMap.has(tag)) {
+        if (this.#hashtagMap.has(tag)) {
             //@ts-ignore
             this.#hashtagMap.set(tag, this.#hashtagMap.get(tag) + 1)
-        }
-        else {
+        } else {
             this.#hashtagMap.set(tag, 1)
         }
     }
@@ -43,13 +42,13 @@ export default class Monitor {
     getTop5Hashtags = (): [string, number][] => {
         const hashtagArray = Array.from(this.#hashtagMap)
 
-        hashtagArray.sort(this.sortArray)
+        hashtagArray.sort(Monitor.sortArray)
 
         return hashtagArray.slice(0, 5)
     }
 
-    private sortArray(a: [string, number], b: [string, number]): number {
-        if(a[1] === b[1])
+    private static sortArray(a: [string, number], b: [string, number]): number {
+        if (a[1] === b[1])
             return (a[0] < b[0]) ? -1 : 1
         else {
             return (a[1] < b[1]) ? 1 : -1

@@ -6,7 +6,7 @@ export interface TweetData {
     id?: string
     entities?: Entities
     text?: string
- 
+
 }
 
 export interface Entities {

@@ -1,6 +1,6 @@
 import needle from 'needle';
 import Monitor from './Monitor';
-import { Tweet } from './Tweet';
+import {Tweet} from './Tweet';
 
 
 export default class TwitterListener {
