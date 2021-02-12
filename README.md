@@ -1,6 +1,7 @@
 To run the project:
+
 * copy the .env_default and rename the copy to .env
-** paste your twitter application bearer token in the .env token
+    * paste your twitter application bearer token in the .env token
 * run `npm i` in root directory
 * run `npm start`
 

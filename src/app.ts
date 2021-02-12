@@ -23,7 +23,7 @@ class App {
     }
 
     run() {
-        this.server.listen(3121);
+        this.server.listen(process.env.PORT)
         this.listener.listen()
         console.log('Listening for tweets...')
 
@@ -34,7 +34,7 @@ class App {
                 console.log(`#${index + 1}: Count: ${obj[1].toString().padStart(4)} Tag: ${obj[0]}`)
             })
             console.log('\n')
-        }, 5000)
+        }, Number(process.env.TWEET_STATS_LOG_INTERVAL_MS))
     }
 }
 
