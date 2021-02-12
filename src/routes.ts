@@ -14,7 +14,8 @@ class TweetStatsController {
     private config() {
         this.router.get('/tweet-stats',
             (_req, res) => {
-                res.send(this.monitor.getTweetStats())
+                //res.send(this.monitor.getTweetStats())
+                res.send('{"count":2395,"topHashtags":[["呪術廻戦",12],["กีฬาสีหมีนุช702",9],["เป๊กผลิตโชค",8],["StanWorld",6],["WandaVision",6]]}')
             })
     }
 }
