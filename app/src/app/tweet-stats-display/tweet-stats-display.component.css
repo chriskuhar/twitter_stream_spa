@@ -1,0 +1,23 @@
+table {
+  width: 100% !important;
+}
+
+.mat-header-row {
+  width: 100%;
+}
+
+.mat-row {
+  width: 100%;
+}
+/* Structure */
+.outer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.container {
+  min-width: 900px;
+  max-width: 1050px;
+  min-height: 660px;
+  padding: 50px;
+}

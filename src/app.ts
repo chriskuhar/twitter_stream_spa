@@ -3,19 +3,21 @@ import TwitterListener from "./TwitterListener"
 import * as dotenv from 'dotenv'
 import express from 'express'
 import {routes} from "./routes"
+import cors from 'cors';
 
 dotenv.config()
 
 class App {
     monitor: Monitor
-    //listener: TwitterListener
+    listener: TwitterListener
     server: express.Application
 
     constructor() {
-        this.monitor = new Monitor()
-        //this.listener = new TwitterListener(this.monitor)
-        this.server = express()
-        this.configureRoutes(this.monitor)
+        this.monitor = new Monitor();
+        this.listener = new TwitterListener(this.monitor)
+        this.server = express();
+        this.server.use(cors());
+        this.configureRoutes(this.monitor);
     }
 
     private configureRoutes(monitor: Monitor) {
@@ -24,7 +26,7 @@ class App {
 
     run() {
         this.server.listen(process.env.PORT)
-        //this.listener.listen()
+        this.listener.listen()
         console.log('Listening for tweets...')
 
         setInterval(() => {
