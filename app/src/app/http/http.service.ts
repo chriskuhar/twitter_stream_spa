@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
-import { HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { SvcRes } from '../tweet-stats/fields.interface';
+import { TweetStat } from '../tweet-stats/fields.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,10 +12,9 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
-
-  getTweetStats(): Observable<SvcRes> {
+  getTweetStats(): Observable<TweetStat> {
     return this.http
-        .get<SvcRes>('http://localhost:3121/api/v1/tweet-stats')
+        .get<TweetStat>('http://localhost:3121/api/v1/tweet-stats')
         .pipe(catchError(this.handleError))
   }
 

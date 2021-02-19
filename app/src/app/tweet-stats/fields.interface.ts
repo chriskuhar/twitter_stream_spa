@@ -11,7 +11,7 @@ export interface Fields {
     hashtag: string;
     count: number;
   }
-  export interface SvcRes {
+  export interface TweetStat {
     count: number;
     topHashtags: TopHashTags[];
   }
