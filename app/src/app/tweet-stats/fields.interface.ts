@@ -6,3 +6,12 @@ export interface Fields {
     four: string;
     five: string;
   }
+
+  export interface TopHashTags {
+    hashtag: string;
+    count: number;
+  }
+  export interface SvcRes {
+    count: number;
+    topHashtags: TopHashTags[];
+  }

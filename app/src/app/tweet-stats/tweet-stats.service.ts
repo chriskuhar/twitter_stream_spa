@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Fields } from './fields.interface';
+import { Fields, SvcRes, TopHashTags } from './fields.interface';
+import { HttpService } from './../http/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +9,7 @@ import { Fields } from './fields.interface';
 export class TweetStatsService {
   stats: Fields[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpService) {
     this.stats = new Array();
   }
 
@@ -19,9 +17,7 @@ export class TweetStatsService {
 
     return new Observable((observer) => {
       setInterval(() => {
-        this.http
-        .get('http://localhost:3121/api/v1/tweet-stats')
-        .pipe(catchError(this.handleError))
+        this.http.getTweetStats()
         .subscribe(ret => {
           let r = ret.topHashtags;
           let fields: Fields = {
@@ -45,14 +41,4 @@ export class TweetStatsService {
     return `(${count}) ${tag}`;
   }
 
-  handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-      );
-    }
-    return [];
-  }
 }
