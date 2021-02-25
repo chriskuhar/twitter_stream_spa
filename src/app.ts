@@ -3,6 +3,7 @@ import TwitterListener from "./TwitterListener"
 import * as dotenv from 'dotenv'
 import express from 'express'
 import {routes} from "./routes"
+import {connectTwitterWebSocket} from "./TwitterWebSocket"
 import cors from 'cors';
 
 dotenv.config()
@@ -21,7 +22,8 @@ class App {
     }
 
     private configureRoutes(monitor: Monitor) {
-        this.server.use('/api/v1', routes(monitor))
+        this.server.use('/api/v1', routes(monitor));
+        this.server.use('/api/v1', connectTwitterWebSocket(monitor));
     }
 
     run() {

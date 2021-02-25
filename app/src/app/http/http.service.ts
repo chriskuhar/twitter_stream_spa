@@ -3,14 +3,23 @@ import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { TweetStat } from '../tweet-stats/fields.interface';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { webSocket } from "rxjs/webSocket";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
+  subject: Subject<TweetStat>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.subject = webSocket("ws://localhost:8080");
+  }
+
+  getTweetStatsSockSubject(): Subject<TweetStat> {
+    return this.subject;
+  }
 
   getTweetStats(): Observable<TweetStat> {
     return this.http
